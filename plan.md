@@ -25,8 +25,10 @@
 - [x] renamed `index.tests.tsx` to `index.test.tsx` due to improper CRA naming convention--jest/CRA look for .test, not .tests so .tests is failing to match patterns
 - [x] changed `<div class='tile--header'>` to be `<h2>` instead, for accessibility and testing
 - [x] wrote basic test to find heading 'Deal Portfolio' just to exercise testing platform and practice writing test script
+- [x] upgraded typescript to v5.x.x to resolve library issues with @testing-library/jest-dom that required a version of TS >= 4.5.x
 - [x] added trunk.yaml to .gitignore
 - [x] detached repository from upstream loanstreet repository so i don't accidentally keep attempting to merge upstream with pull requests
+- [x] yarn add -D msw; added MSW so tests exercise real fetch calls like our components; they are intercepted at the network layer and answered with realistic mock responses instead of either mocking fetch away entirely, or depenting on a live json-server process being up during test runs.
 
 ## Sources
 

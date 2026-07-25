@@ -2,16 +2,6 @@
   "name": "react-interview",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "msw": "^2.15.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
-    "sass": "1.83.1",
-    "redux": "^4.0.0"
-  },
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts --openssl-legacy-provider start index.tsx",
@@ -31,6 +21,15 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-redux": "^7.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.0",
+    "sass": "1.83.1"
+  },
   "devDependencies": {
     "@testing-library/react": "^10.2.1",
     "@types/jest": "^25.2.3",
@@ -39,6 +38,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
+    "msw": "^2.15.0",
     "react-testing-library": "^8.0.1",
     "typescript": "^5"
   }
