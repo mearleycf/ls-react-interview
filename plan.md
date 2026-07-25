@@ -1,4 +1,6 @@
-# Attack Plan
+# Loan Street React Interview
+
+## Plan of Attack to Complete Tasks / Tasks to Complete
 
 - [x] Add `@testing-library/jest-dom` (matchers) and `@testing-library/user-event` (realistic interaction simulation); wire up `src/setupTests.ts`
 - [ ] Create tests (acceptance-level: validation errors, remove, publish, sort)
@@ -29,7 +31,15 @@
 - [x] added trunk.yaml to .gitignore
 - [x] detached repository from upstream loanstreet repository so i don't accidentally keep attempting to merge upstream with pull requests
 - [x] yarn add -D msw; added MSW so tests exercise real fetch calls like our components; they are intercepted at the network layer and answered with realistic mock responses instead of either mocking fetch away entirely, or depenting on a live json-server process being up during test runs.
+- [x] handlers.ts to start mocking out mock services for test api handling (part of msw)
+- [x] server.ts for mocking out servers for test api handling (part of msw)
+- [x] added proxy to package.json
+- [x] wrote handler for http.get for msw handler
+- [x] wrote handler for http.post for msw; use reassignment of 'deals' to new array to avoid mutating existing deals array; react and redux rely on shallow checks of array mutation (i.e. did a ref change). By matching convention we stay consistent within app and avoid potential issues downstream. Also, immutable vars is generally better code.
+- [x] wrote handler for http.patch for msw; convert params.id to number
+- [x] wrote handler for http.delete for msw; convert params.id to number
 
 ## Sources
 
-- https://create-react-app.dev/docs/running-tests/
+- [https://create-react-app.dev/docs/running-tests/](Create React App - Running Tests)
+- [https://www.npmjs.com/package/msw](MSW - Mock Service Workers)
