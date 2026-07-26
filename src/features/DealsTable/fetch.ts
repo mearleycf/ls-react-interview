@@ -65,12 +65,12 @@ export const addDeal = (deal: Omit<DealType, "id">) =>
     body: JSON.stringify(deal),
   });
 
-export const updateDeal = (id: string, updates: Partial<DealType>) =>
+export const updateDeal = (id: number, updates: Partial<DealType>) =>
   request<DealType>(`/deals/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updates),
   });
 
-export const removeDeal = (id: string) =>
+export const removeDeal = (id: number) =>
   request<void>(`/deals/${id}`, { method: "DELETE" });
