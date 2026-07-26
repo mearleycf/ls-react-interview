@@ -50,6 +50,10 @@
   "jest": {
     "moduleNameMapper": {
       "^rettime$": "<rootDir>/node_modules/rettime/src/index.ts"
-    }
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\](?!rettime[/\\\\]src[/\\\\]).+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ]
   }
 }
