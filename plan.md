@@ -10,15 +10,15 @@
 - [x] Add fetch calls for GET/PUT/POST/DELETE — interfaces for the json-server calls
   - Note: this is really a small API module (`getDeals`, `createDeal`, `updateDeal`, `deleteDeal` wrapping `fetch`), not Redux-style middleware — worth keeping the vocabulary precise for the debrief.
 - [x] Add sort functionality
-- [ ] Integrate RJSF, then add in validation
+- [x] Integrate RJSF, then add in validation
 
 > Checkpoint: Task 1 (validation) and Task 4 (sort) done. Data-layer functions in place to support Tasks 2/3 (remove/publish). Bonus 1 (json-server persistence) underway, Bonus 2 (tests) started.
 
 - [x] Decide: TanStack Query, or stick with Redux, for remove/publish
 - [x] If TanStack Query: remove redux functionality
 - [x] If TanStack Query: implement remove and publish using TanStack Query
-- [ ] Decide: shadcn, or another approach, for "pretty up the table styling"
-- [ ] Implement table styling accordingly
+- [x] Implement Material UI for some quick, RJSF-compliant styling
+- [x] Implement table styling accordingly
 
 ## Work Done
 
@@ -84,6 +84,12 @@
 - [x] installed react-number-format so we can do a currency mask on the deal size input
 - [x] created CurrencyWidget.tsx to make a custom widget for RJSF that lets us have a currency mask for deal size
 - [x] added CurrencyWidget to UiSchema in newDealSchema.ts
+- [x] removed dead code from NewDealForm.tsx that wasn't needed after switching to RJSF
+- [x] added bootstrap, RJSF uses it by default; then removed bootstrap, because I was wrong.
+- [x] ran into an issue with RJSF 5.24.13, related to babel and Form.js; the fix, per Claude, was to downgrade RJSF to 5.24.5, which was the version that has the code necessary to not cause the error we are experiencing; performed the downgrade.
+- [x] chose material UI (v4) for the styling task; it was one of the themes that works with RJSF, and it is the only theme where I liked how they styled their tables.
+  - note: I had Claude do most of the implementation here--the work was a matter of importing material-ui components (e.g. TableRow, TableCell) and replacing the standard versions of those html elements (e.g. `<tr>`, `<td>`) with the react material ui versions. Grunt work, good work for the AI.
+- [x] doing some basic freeform style riffing on the site; added the loanstreet wordmark based logo to replace the symbol only logo; used a gradient background for the background of the table header row; changed the actions text color to be a loanstreet green color; changed the submit button to be a loanstreet green color; changed row hover to be $RobinLight1 instead of the default dark slate blue it was; changed app background color to $Robin. Changed sort button colors to Ivory. Increased App--Header font size to 20px (1.25rem) instead of 14px--I didn't like how small it was...
 
 ## Sources
 
