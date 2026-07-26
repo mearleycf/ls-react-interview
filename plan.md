@@ -74,6 +74,9 @@
 - [x] moved to DealsTableRow to stub out Delete and Publish/Unpublish functionality as actions in a new column
 - [x] wired up tanstack useMutation for removeDeal and updateDeal; renamed the mutate and isPending destructures so they don't collide since I have multiple instances of useMutation
 - [x] added onClick and disabled attributes to the appropriate buttons on DealsTableRow.tsx to enable Delete and Publish/Unpublish functionality
+- [x] installed RJSF/core, RJSF/utils, RJSF/validator-ajv8
+- [x] downgraded RJSF to v5.24.13, and upgraded React/dom to v16.14.0, for compatibility reasons
+- [x] did a pass to remove any remaining traces of redux from package.json, other files, etc.
 
 ## Sources
 

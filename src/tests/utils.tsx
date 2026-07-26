@@ -1,23 +1,24 @@
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import {
-  initialState as reducerInitialState,
-  default as reducer,
-} from "../redux/reducer";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type WrapperProps = { children: React.ReactNode };
+
 function render(
   ui: React.ReactElement,
   {
-    initialState = reducerInitialState,
-    store = createStore(reducer, initialState),
+    queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    }),
     ...renderOptions
   }: any = {}
 ) {
   function Wrapper({ children }: WrapperProps) {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
