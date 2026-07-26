@@ -77,6 +77,10 @@
 - [x] installed RJSF/core, RJSF/utils, RJSF/validator-ajv8
 - [x] downgraded RJSF to v5.24.13, and upgraded React/dom to v16.14.0, for compatibility reasons
 - [x] did a pass to remove any remaining traces of redux from package.json, other files, etc.
+- [x] implemented json schema for new deal in newDealSchema.ts using RSJF
+- [x] moved to NewDealForm.tsx; replaced old return statement with RJSF version returning the RJSF `<Form>` html tag.
+- [x] added in UiSchema to add ui:placeholder values back in for the input fields
+- [x] converted the deal type field from an input field to a select field with 4 options--consumer auto, real estate, commercial, and home equity--just because, to exercise the ui schema framework
 
 ## Sources
 
