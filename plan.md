@@ -14,8 +14,8 @@
 
 > Checkpoint: Task 1 (validation) and Task 4 (sort) done. Data-layer functions in place to support Tasks 2/3 (remove/publish). Bonus 1 (json-server persistence) underway, Bonus 2 (tests) started.
 
-- [ ] Decide: TanStack Query, or stick with Redux, for remove/publish
-- [ ] If TanStack Query: remove redux functionality
+- [x] Decide: TanStack Query, or stick with Redux, for remove/publish
+- [x] If TanStack Query: remove redux functionality
 - [ ] If TanStack Query: implement remove and publish using TanStack Query
 - [ ] If not: implement remove and publish using Redux
 - [ ] Decide: shadcn, or another approach, for "pretty up the table styling"
@@ -57,6 +57,24 @@
 - [x] wrote vars for sorting the columns; just a quick way to shorten what is needed in the html elements
 - [x] rewrote the `<th>` elements to have `aria-sort` attributes that use the appropriate var and method's return property to set the sort icon direction to be displayed.
 - [x] implemented the `<button>` for the sort; used button because it is semantic, since sorting is a click action, and using a button gives us accessibility for free
+- [x] going with tanstack query; work is more trivial at this point, because we implemented fetch and we used useState for sort functionality
+- [x] installed tanstack query@4
+- [x] rewrite src/index.tsx to use tanstack query instead of redux; now any child of App can call useQuery/useMutation/useQueryClient. App cache lives on queryClient now, instead of on Redux store.
+- [x] deleted DealsTableContainer.tsx; redux file, not needed
+- [x] deleted NewDealFormContainer.tsx; redux file, not needed
+- [x] updated DealsTable.tsx to use tanstack query; removed props, added a constant to deconstruct deals, isLoading, isError, and error from useQuery and getDeals
+- [x] wrote if statements to handle loading and error states for below the heading, while the table is loading, or when the table fails to load
+- [x] updated App.tsx to remove refs to DealsTableContainer and NewDealFormContainer
+- [x] removed lodash import; not used anymore
+- [x] removed DealFormProps; component doesn't take props with Tanstack query
+- [x] updated DealForm to use tanstack query; deconstructed createDeal, isLoading, isError, error from useMutation
+- [x] moved onSubmit call to form element, because natively the button has no type attribute (defaults to submit inside a form). So, in a form, clicking an untyped button, where the form does not have an onSubmit handler, will cause the mutation (call addDeal) AND also cause a full page reload. Moving onSubmit to form means we call addDeal without reloading the page; it also means pressing Enter from any form field will trigger the addDeal onSubmit.
+- [x] made button a little more user friendly; disabled while isLoading, change button text to Creating...
+- [x] added error handling
+- [x] tested json-server/fetch functionality by adding new deal; deal successfully added to db.json, although ID was wrong...added a second one to validate that enter key triggers Create Deal button successfully, which it did...
+- [x] moved to DealsTableRow to stub out Delete and Publish/Unpublish functionality as actions in a new column
+- [x] wired up tanstack useMutation for removeDeal and updateDeal; renamed the mutate and isPending destructures so they don't collide since I have multiple instances of useMutation
+- [x] added onClick and disabled attributes to the appropriate buttons on DealsTableRow.tsx to enable Delete and Publish/Unpublish functionality
 
 ## Sources
 
