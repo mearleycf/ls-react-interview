@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useMemo } from "react";
-import { DealsListType } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { getDeals } from "./fetch";
 import DealsTableRow from "./DealsTableRow/DealsTableRow";
 import "./DealsTable.scss";
 import SortIcon from "../../assets/SortIcon";
 
-type DealsTableProps = DealsListType;
 type SortableField = "institution" | "dealType" | "dealSize" | "isPublished";
 type SortState = { key: SortableField; direction: "asc" | "desc" } | null;
 type SortIndicator = {
@@ -13,8 +13,16 @@ type SortIndicator = {
   iconDirection: "up" | "down" | undefined;
 };
 
-const DealsTable = (props: DealsTableProps) => {
-  const { deals } = props;
+const DealsTable = () => {
+  const {
+    data: deals = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["deals"],
+    queryFn: getDeals,
+  });
 
   const [sortState, setSortState] = useState<SortState>(null);
   const handleSort = (field: SortableField) => () => {
@@ -42,6 +50,24 @@ const DealsTable = (props: DealsTableProps) => {
       return direction === "asc" ? comparison : -comparison;
     });
   }, [deals, sortState]);
+
+  if (isLoading) {
+    return (
+      <div className="tile">
+        <h2 className="tile--header">Deal Portfolio</h2>
+        <p>Loading deals...</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="tile">
+        <h2 className="tile--header">Deal Portfolio</h2>
+        <p>Failed to load deals: {(error as Error).message}</p>
+      </div>
+    );
+  }
 
   const getSortIndicator = (field: SortableField): SortIndicator => {
     if (sortState?.key !== field) {
@@ -72,38 +98,47 @@ const DealsTable = (props: DealsTableProps) => {
               className="DealsTable--headerCell"
               aria-sort={institutionSort.ariaSort}
             >
-              <button onClick={handleSort("institution")}>
+              <div className="flex-row">
                 Institution
-                <SortIcon direction={institutionSort.iconDirection} />
-              </button>
+                <button onClick={handleSort("institution")}>
+                  <SortIcon direction={institutionSort.iconDirection} />
+                </button>
+              </div>
             </th>
             <th
               className="DealsTable--headerCell"
               aria-sort={dealTypeSort.ariaSort}
             >
-              <button onClick={handleSort("dealType")}>
+              <div className="flex-row">
                 Deal Type
-                <SortIcon direction={dealTypeSort.iconDirection} />
-              </button>
+                <button onClick={handleSort("dealType")}>
+                  <SortIcon direction={dealTypeSort.iconDirection} />
+                </button>
+              </div>
             </th>
             <th
               className="DealsTable--headerCell"
               aria-sort={dealSizeSort.ariaSort}
             >
-              <button onClick={handleSort("dealSize")}>
+              <div className="flex-row">
                 Deal Size
-                <SortIcon direction={dealSizeSort.iconDirection} />
-              </button>
+                <button onClick={handleSort("dealSize")}>
+                  <SortIcon direction={dealSizeSort.iconDirection} />
+                </button>
+              </div>
             </th>
             <th
               className="DealsTable--headerCell"
               aria-sort={isPublishedSort.ariaSort}
             >
-              <button onClick={handleSort("isPublished")}>
+              <div className="flex-row">
                 Is Published?
-                <SortIcon direction={isPublishedSort.iconDirection} />
-              </button>
+                <button onClick={handleSort("isPublished")}>
+                  <SortIcon direction={isPublishedSort.iconDirection} />
+                </button>
+              </div>
             </th>
+            <th className="DealsTable--headerCell">Actions</th>
           </tr>
         </thead>
         <tbody>{dealsTableRows}</tbody>
