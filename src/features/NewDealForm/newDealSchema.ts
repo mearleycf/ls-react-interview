@@ -1,4 +1,5 @@
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
+import { CurrencyWidget } from "./CurrencyWidget";
 
 export type NewDealFormData = {
   institution: string;
@@ -23,4 +24,5 @@ export const newDealSchema: RJSFSchema = {
 export const newDealUiSchema: UiSchema = {
   institution: { "ui:placeholder": "LS Credit Union" },
   dealType: { "ui:placeholder": "Consumer Auto" },
+  dealSize: { "ui:widget": CurrencyWidget },
 };

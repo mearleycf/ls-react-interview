@@ -81,6 +81,9 @@
 - [x] moved to NewDealForm.tsx; replaced old return statement with RJSF version returning the RJSF `<Form>` html tag.
 - [x] added in UiSchema to add ui:placeholder values back in for the input fields
 - [x] converted the deal type field from an input field to a select field with 4 options--consumer auto, real estate, commercial, and home equity--just because, to exercise the ui schema framework
+- [x] installed react-number-format so we can do a currency mask on the deal size input
+- [x] created CurrencyWidget.tsx to make a custom widget for RJSF that lets us have a currency mask for deal size
+- [x] added CurrencyWidget to UiSchema in newDealSchema.ts
 
 ## Sources
 
