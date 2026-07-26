@@ -58,7 +58,7 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 
 export const getDeals = () => request<DealType[]>("/deals");
 
-export const addDeal = (deal: Omit<DealType, "id">) =>
+export const addDeal = (deal: DealType) =>
   request<DealType>("/deals", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
