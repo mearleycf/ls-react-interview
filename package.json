@@ -34,6 +34,9 @@
     "sass": "1.83.1"
   },
   "devDependencies": {
+    "@rjsf/core": "^6.7.1",
+    "@rjsf/utils": "^6.7.1",
+    "@rjsf/validator-ajv8": "^6.7.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^10.2.1",
