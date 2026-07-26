@@ -7,8 +7,8 @@ import LSLogo from "../../assets/LSLogo";
 const App = () => {
   return (
     <>
-      <div className="App--header">
-        <LSLogo />
+      <div className="App--header flex-row">
+        <img className="App--logo" src="./loanstreet.svg" />
       </div>
       <div className="App">
         <DealsTable />

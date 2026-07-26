@@ -18,4 +18,12 @@
     margin-top: 8px;
     align-self: flex-end;
   }
+
+  &--submitButton {
+    background-color: $LoanstreetGreenDark !important;
+
+    &:hover {
+      background-color: $LoanstreetGreenDark1 !important;
+    }
+  }
 }
