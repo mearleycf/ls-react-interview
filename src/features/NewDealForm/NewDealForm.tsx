@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import noop from "lodash/noop";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { addDeal } from "../DealsTable/fetch";
 import { DealType } from "../../types";
 import "./NewDealForm.scss";
 
@@ -10,27 +11,37 @@ const DEFAULT_DEAL: DealType = {
   isPublished: false,
 };
 
-type DealFormProps = {
-  onCreateDeal: (deal: DealType) => any;
-};
+const DealForm = () => {
+  const queryClient = useQueryClient();
 
-const DealForm = (props: DealFormProps) => {
-  const { onCreateDeal = noop } = props;
   const [newDeal, setNewDeal] = useState(DEFAULT_DEAL);
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: (newDealInput: Omit<DealType, "id">) => {
+      const deals = queryClient.getQueryData<DealType[]>(["deals"]) ?? [];
+      const nextId =
+        deals.length > 0
+          ? Math.max(...deals.map((d) => Number(d.id) ?? 0)) + 1
+          : 1;
+      return addDeal({ ...newDealInput, id: nextId });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["deals"] });
+      setNewDeal(DEFAULT_DEAL);
+    },
+  });
+
+  const handleCreateDeal = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    mutate({ ...newDeal });
+  };
 
   const handleUpdateProperty =
     (property: string) => (e: React.ChangeEvent<any>) =>
       setNewDeal({ ...newDeal, [property]: e.target.value });
 
-  const handleCreateDeal = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    onCreateDeal({ ...newDeal });
-    // Reset state for the next deal input.
-    setNewDeal({ ...DEFAULT_DEAL });
-  };
-
   return (
-    <form className="NewDealForm tile">
+    <form className="NewDealForm tile" onSubmit={handleCreateDeal}>
       <h2 className="tile--header">Add New Deal</h2>
       <div className="NewDealForm--div">
         <label className="NewDealForm--label">Institution</label>
@@ -62,9 +73,10 @@ const DealForm = (props: DealFormProps) => {
           required
         />
       </div>
-      <button className="NewDealForm--button" onClick={handleCreateDeal}>
-        Create Deal
+      <button className="NewDealForm--button" disabled={isPending}>
+        {isPending ? "Creating..." : "Create Deal"}
       </button>
+      {isError && <p>Failed to create deal: {(error as Error).message}</p>}
     </form>
   );
 };
