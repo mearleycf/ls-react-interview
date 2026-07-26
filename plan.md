@@ -3,6 +3,7 @@
 ## Plan of Attack to Complete Tasks / Tasks to Complete
 
 - [x] Add `@testing-library/jest-dom` (matchers) and `@testing-library/user-event` (realistic interaction simulation); wire up `src/setupTests.ts`
+- [x] Build out MSW server.ts and handlers.ts for being able to make mock service calls for tests
 - [ ] Create tests (acceptance-level: validation errors, remove, publish, sort)
   - Note: written before RJSF exists, so these are best guesses at error text/behavior. Expect to reconcile assertions with RJSF's actual output (AJV default messages, or whatever's overridden via `customValidate`/`uiSchema`) once step 4 lands — not a planning flaw, just the normal cost of tests-first.
   - Note: remove/publish tests written here are provisional. `src/tests/utils.tsx` currently wraps renders in a Redux `<Provider>`, so these will pass against that setup for now — but if TanStack Query is chosen at the decision point below, the wrapper becomes a `QueryClientProvider` and these tests likely need rewriting (different mocking strategy: MSW intercepting `fetch` vs. asserting against a Redux store). Sort/validation tests aren't affected by this since they don't touch the state-management layer.
@@ -38,8 +39,16 @@
 - [x] wrote handler for http.post for msw; use reassignment of 'deals' to new array to avoid mutating existing deals array; react and redux rely on shallow checks of array mutation (i.e. did a ref change). By matching convention we stay consistent within app and avoid potential issues downstream. Also, immutable vars is generally better code.
 - [x] wrote handler for http.patch for msw; convert params.id to number
 - [x] wrote handler for http.delete for msw; convert params.id to number
+- [x] started fetch.ts file
+- [x] wrote 'request' function with generic `<T>` type param so that all subsequent calls can use the same request function and return a correctly typed result via a returned `Promise<T>`
+  - note: the `options?: RequestInit` use here represents the set of options that can be used to configure a fetch request; for my purposes, we're using it for method, headers, and body. Basically it's a way to tell typescript that we're going to optionally pass in some fetch params, depending on the call we are making.
+- [x] wrote getDeals endpoint
+- [x] wrote addDeal endpoint
+- [x] wrote udpateDeal endpoint
+- [x] wrote removeDeal endpoint
 
 ## Sources
 
 - [https://create-react-app.dev/docs/running-tests/](Create React App - Running Tests)
 - [https://www.npmjs.com/package/msw](MSW - Mock Service Workers)
+- [https://developer.mozilla.org/en-US/docs/Web/API/RequestInit](RequestInit type in Web APIs)

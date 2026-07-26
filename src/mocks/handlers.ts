@@ -4,16 +4,6 @@ import dbSeed from "../../db.json";
 
 let deals: DealType[] = [...dbSeed.deals];
 
-/*
-{
-  "id": 1, // optional number
-  "institution": "LS Credit Union", // string
-  "dealSize": "1000000", // string
-  "dealType": "Consumer Auto", // string
-  "isPublished": true // boolean
-}
-*/
-
 export const handlers = [
   http.get("/deals", () => {
     return HttpResponse.json(deals);
