@@ -4,9 +4,8 @@
 
 - [x] Add `@testing-library/jest-dom` (matchers) and `@testing-library/user-event` (realistic interaction simulation); wire up `src/setupTests.ts`
 - [x] Build out MSW server.ts and handlers.ts for being able to make mock service calls for tests
-- [ ] Create tests (acceptance-level: validation errors, remove, publish, sort)
-  - Note: written before RJSF exists, so these are best guesses at error text/behavior. Expect to reconcile assertions with RJSF's actual output (AJV default messages, or whatever's overridden via `customValidate`/`uiSchema`) once step 4 lands — not a planning flaw, just the normal cost of tests-first.
-  - Note: remove/publish tests written here are provisional. `src/tests/utils.tsx` currently wraps renders in a Redux `<Provider>`, so these will pass against that setup for now — but if TanStack Query is chosen at the decision point below, the wrapper becomes a `QueryClientProvider` and these tests likely need rewriting (different mocking strategy: MSW intercepting `fetch` vs. asserting against a Redux store). Sort/validation tests aren't affected by this since they don't touch the state-management layer.
+- [x] Create tests (acceptance-level: validation errors, remove, publish, sort)
+  - Note: ended up only writing markdown documents stubbing out my recommendations for tests I would write, due to time constraints.
 - [x] Add fetch calls for GET/PUT/POST/DELETE — interfaces for the json-server calls
   - Note: this is really a small API module (`getDeals`, `createDeal`, `updateDeal`, `deleteDeal` wrapping `fetch`), not Redux-style middleware — worth keeping the vocabulary precise for the debrief.
 - [x] Add sort functionality
@@ -90,6 +89,7 @@
 - [x] chose material UI (v4) for the styling task; it was one of the themes that works with RJSF, and it is the only theme where I liked how they styled their tables.
   - note: I had Claude do most of the implementation here--the work was a matter of importing material-ui components (e.g. TableRow, TableCell) and replacing the standard versions of those html elements (e.g. `<tr>`, `<td>`) with the react material ui versions. Grunt work, good work for the AI.
 - [x] doing some basic freeform style riffing on the site; added the loanstreet wordmark based logo to replace the symbol only logo; used a gradient background for the background of the table header row; changed the actions text color to be a loanstreet green color; changed the submit button to be a loanstreet green color; changed row hover to be $RobinLight1 instead of the default dark slate blue it was; changed app background color to $Robin. Changed sort button colors to Ivory. Increased App--Header font size to 20px (1.25rem) instead of 14px--I didn't like how small it was...
+- [x] had claude create markdown docs for each component, documenting a list of tests it recommends we write if we were going to write the tests, given more time.
 
 ## Sources
 
