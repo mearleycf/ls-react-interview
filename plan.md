@@ -82,3 +82,4 @@
 - [https://developer.mozilla.org/en-US/docs/Web/API/RequestInit](RequestInit type in Web APIs)
 - [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204](Response Code 204 No Content)
 - [https://ui.shadcn.com/docs/components/aria/table](Shadcn UI React Aria Table Component)
+- [https://rjsf-team.github.io/react-jsonschema-form/docs/#installation](React-JSON-Schema-Form)
