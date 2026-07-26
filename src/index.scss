@@ -72,5 +72,20 @@ body {
       background-color: rgba(0, 0, 0, 0);
       border: 1px solid $LoanstreetGreenDark1;
     }
+
+    &:active {
+      color: $BrandGoldDark1;
+      transform: scale(0.95);
+    }
+
+    &:focus {
+      outline: 2px solid $BrandGoldDark1;
+    }
+
+    &:disabled {
+      color: $Slate;
+      text-decoration: none;
+      cursor: not-allowed;
+    }
   }
 }
