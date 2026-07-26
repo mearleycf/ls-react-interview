@@ -7,7 +7,7 @@
 - [ ] Create tests (acceptance-level: validation errors, remove, publish, sort)
   - Note: written before RJSF exists, so these are best guesses at error text/behavior. Expect to reconcile assertions with RJSF's actual output (AJV default messages, or whatever's overridden via `customValidate`/`uiSchema`) once step 4 lands — not a planning flaw, just the normal cost of tests-first.
   - Note: remove/publish tests written here are provisional. `src/tests/utils.tsx` currently wraps renders in a Redux `<Provider>`, so these will pass against that setup for now — but if TanStack Query is chosen at the decision point below, the wrapper becomes a `QueryClientProvider` and these tests likely need rewriting (different mocking strategy: MSW intercepting `fetch` vs. asserting against a Redux store). Sort/validation tests aren't affected by this since they don't touch the state-management layer.
-- [ ] Add fetch calls for GET/PUT/POST/DELETE — interfaces for the json-server calls
+- [x] Add fetch calls for GET/PUT/POST/DELETE — interfaces for the json-server calls
   - Note: this is really a small API module (`getDeals`, `createDeal`, `updateDeal`, `deleteDeal` wrapping `fetch`), not Redux-style middleware — worth keeping the vocabulary precise for the debrief.
 - [ ] Add sort functionality
 - [ ] Integrate RJSF, then add in validation
@@ -52,3 +52,4 @@
 - [https://create-react-app.dev/docs/running-tests/](Create React App - Running Tests)
 - [https://www.npmjs.com/package/msw](MSW - Mock Service Workers)
 - [https://developer.mozilla.org/en-US/docs/Web/API/RequestInit](RequestInit type in Web APIs)
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204](Response Code 204 No Content)
