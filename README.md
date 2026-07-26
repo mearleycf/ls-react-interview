@@ -13,7 +13,8 @@ _Note_: You will need [Yarn package manager](https://yarnpkg.com/getting-started
 1. Clone or Fork the repository
 2. Run `yarn`, in the project's root directory, to install all the packages
 3. Run `yarn start`, in the project's root directory, to run the local frontend server
-4. _For Bonus Section:_ To access the mock API, run `yarn global add json-server` followed by `yarn server`
+4. _For Bonus Section:_ Run `yarn server` to start the mock API (`json-server` is pinned as a project dependency, no global install needed)
+5. To run both the frontend and the mock API together in one command, use `yarn dev`
 
 ## Your Tasks
 

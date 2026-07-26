@@ -16,8 +16,7 @@
 
 - [x] Decide: TanStack Query, or stick with Redux, for remove/publish
 - [x] If TanStack Query: remove redux functionality
-- [ ] If TanStack Query: implement remove and publish using TanStack Query
-- [ ] If not: implement remove and publish using Redux
+- [x] If TanStack Query: implement remove and publish using TanStack Query
 - [ ] Decide: shadcn, or another approach, for "pretty up the table styling"
 - [ ] Implement table styling accordingly
 
@@ -82,3 +81,4 @@
 - [https://www.npmjs.com/package/msw](MSW - Mock Service Workers)
 - [https://developer.mozilla.org/en-US/docs/Web/API/RequestInit](RequestInit type in Web APIs)
 - [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204](Response Code 204 No Content)
+- [https://ui.shadcn.com/docs/components/aria/table](Shadcn UI React Aria Table Component)

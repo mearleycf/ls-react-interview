@@ -8,7 +8,8 @@
     "start": "react-scripts --openssl-legacy-provider start index.tsx",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server": "json-server --watch db.json --port 8000"
+    "server": "json-server --watch db.json --port 8000",
+    "dev": "concurrently \"yarn server\" \"yarn start\""
   },
   "browserslist": {
     "production": [
@@ -43,6 +44,8 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
+    "concurrently": "^10.0.4",
+    "json-server": "0.17.4",
     "msw": "^2.15.0",
     "mutationobserver-shim": "^0.3.7",
     "react-testing-library": "^8.0.1",
