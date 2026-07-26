@@ -43,7 +43,13 @@
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
     "msw": "^2.15.0",
+    "mutationobserver-shim": "^0.3.7",
     "react-testing-library": "^8.0.1",
     "typescript": "^5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^rettime$": "<rootDir>/node_modules/rettime/src/index.ts"
+    }
   }
 }
