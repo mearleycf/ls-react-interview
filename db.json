@@ -1,18 +1,54 @@
 {
   "deals": [
     {
-      "id": 1,
+      "id": "1",
       "institution": "LS Credit Union",
       "dealSize": "1000000",
       "dealType": "Consumer Auto",
       "isPublished": true
     },
     {
-      "id": 2,
+      "id": "2",
       "institution": "LS Credit Union",
       "dealSize": "5000000",
       "dealType": "Real Estate",
       "isPublished": false
+    },
+    {
+      "id": "3",
+      "institution": "LS Credit Union",
+      "dealSize": "2000000",
+      "dealType": "Consumer Auto",
+      "isPublished": true
+    },
+    {
+      "id": "4",
+      "institution": "LS Credit Union",
+      "dealSize": "3000000",
+      "dealType": "Real Estate",
+      "isPublished": false
+    },
+    {
+      "id": "5",
+      "institution": "LS Credit Union",
+      "dealType": "Consumer Auto",
+      "dealSize": "6000000",
+      "isPublished": false
+    },
+    {
+      "id": "6",
+      "institution": "LS Credit Union",
+      "dealType": "Real Estate",
+      "dealSize": "4000000",
+      "isPublished": false
+    },
+    {
+      "id": "kFtkCkaSOo0",
+      "institution": "Test Bank",
+      "dealType": "Test",
+      "dealSize": "1",
+      "isPublished": false
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
