@@ -11,17 +11,14 @@ import { addDeal } from "../DealsTable/fetch";
 import { DealType } from "../../types";
 import "./NewDealForm.scss";
 
-const DEFAULT_DEAL: DealType = {
-  institution: "",
-  dealType: "",
-  dealSize: "",
-  isPublished: false,
-};
-
 const DealForm = () => {
   const queryClient = useQueryClient();
 
-  const [newDeal, setNewDeal] = useState(DEFAULT_DEAL);
+  // Bumping this remounts <Form>, discarding its internal state -- the
+  // simplest way to reset a schema-driven form back to empty after a
+  // successful create, without fighting RJSF's default uncontrolled
+  // behavior for normal typing.
+  const [formKey, setFormKey] = useState(0);
 
   const { mutate } = useMutation({
     mutationFn: (newDealInput: Omit<DealType, "id">) => {
@@ -34,7 +31,7 @@ const DealForm = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deals"] });
-      setNewDeal(DEFAULT_DEAL);
+      setFormKey((key) => key + 1);
     },
   });
 
@@ -42,6 +39,7 @@ const DealForm = () => {
     <div className="NewDealForm tile">
       <h2 className="tile--header">Add New Deal</h2>
       <Form<NewDealFormData>
+        key={formKey}
         schema={newDealSchema}
         uiSchema={newDealUiSchema}
         validator={validator}
