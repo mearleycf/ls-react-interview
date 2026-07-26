@@ -9,7 +9,7 @@ body {
   }
 
   margin: 0;
- 
+
   color: $Ink;
   font-size: $Body;
   background-color: $Fog;
@@ -69,5 +69,19 @@ body {
       font-size: $Header;
       margin-bottom: 16px;
     }
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .button--transparent {
+    background-color: rgba(0, 0, 0, 0);
+    color: blue;
+    text-decoration: underline;
   }
 }
