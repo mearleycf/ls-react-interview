@@ -18,9 +18,9 @@ const DealForm = (props: DealFormProps) => {
   const { onCreateDeal = noop } = props;
   const [newDeal, setNewDeal] = useState(DEFAULT_DEAL);
 
-  const handleUpdateProperty = (property: string) => (
-    e: React.ChangeEvent<any>
-  ) => setNewDeal({ ...newDeal, [property]: e.target.value });
+  const handleUpdateProperty =
+    (property: string) => (e: React.ChangeEvent<any>) =>
+      setNewDeal({ ...newDeal, [property]: e.target.value });
 
   const handleCreateDeal = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -30,39 +30,39 @@ const DealForm = (props: DealFormProps) => {
   };
 
   return (
-    <form className='NewDealForm tile'>
-      <div className='tile--header'>Add New Deal</div>
-      <div className='NewDealForm--div'>
-        <label className='NewDealForm--label'>Institution</label>
+    <form className="NewDealForm tile">
+      <h2 className="tile--header">Add New Deal</h2>
+      <div className="NewDealForm--div">
+        <label className="NewDealForm--label">Institution</label>
         <input
-          className='NewDealForm--input'
+          className="NewDealForm--input"
           value={newDeal.institution}
-          placeholder='LS Credit Union'
+          placeholder="LS Credit Union"
           onChange={handleUpdateProperty("institution")}
           required
         />
       </div>
-      <div className='NewDealForm--div'>
-        <label className='NewDealForm--label'>Deal Type</label>
+      <div className="NewDealForm--div">
+        <label className="NewDealForm--label">Deal Type</label>
         <input
-          className='NewDealForm--input'
+          className="NewDealForm--input"
           value={newDeal.dealType}
-          placeholder='Consumer Auto'
+          placeholder="Consumer Auto"
           onChange={handleUpdateProperty("dealType")}
           required
         />
       </div>
-      <div className='NewDealForm--div'>
-        <label className='NewDealForm--label'>Deal Size</label>
+      <div className="NewDealForm--div">
+        <label className="NewDealForm--label">Deal Size</label>
         <input
-          className='NewDealForm--input'
+          className="NewDealForm--input"
           value={newDeal.dealSize}
-          placeholder='$1,000,000'
+          placeholder="$1,000,000"
           onChange={handleUpdateProperty("dealSize")}
           required
         />
       </div>
-      <button className='NewDealForm--button' onClick={handleCreateDeal}>
+      <button className="NewDealForm--button" onClick={handleCreateDeal}>
         Create Deal
       </button>
     </form>

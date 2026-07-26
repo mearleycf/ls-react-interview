@@ -9,7 +9,7 @@
   - Note: remove/publish tests written here are provisional. `src/tests/utils.tsx` currently wraps renders in a Redux `<Provider>`, so these will pass against that setup for now — but if TanStack Query is chosen at the decision point below, the wrapper becomes a `QueryClientProvider` and these tests likely need rewriting (different mocking strategy: MSW intercepting `fetch` vs. asserting against a Redux store). Sort/validation tests aren't affected by this since they don't touch the state-management layer.
 - [x] Add fetch calls for GET/PUT/POST/DELETE — interfaces for the json-server calls
   - Note: this is really a small API module (`getDeals`, `createDeal`, `updateDeal`, `deleteDeal` wrapping `fetch`), not Redux-style middleware — worth keeping the vocabulary precise for the debrief.
-- [ ] Add sort functionality
+- [x] Add sort functionality
 - [ ] Integrate RJSF, then add in validation
 
 > Checkpoint: Task 1 (validation) and Task 4 (sort) done. Data-layer functions in place to support Tasks 2/3 (remove/publish). Bonus 1 (json-server persistence) underway, Bonus 2 (tests) started.
@@ -46,6 +46,17 @@
 - [x] wrote addDeal endpoint
 - [x] wrote udpateDeal endpoint
 - [x] wrote removeDeal endpoint
+- [x] move to DealsTable.tsx, start defining types for sorting;
+  - SortableField gives us 4 values to sort on
+  - SortState gives us an object with 2 keys--key and direction--or a null option
+  - SortIndicator gives us two keys--ariaSort and iconDirection--and the two keys have 3 sets of paired values that equate to ascending/up, descending/down, and none/undefined
+- [x] implement useState for storing sort states
+- [x] write handleSort function; takes previous sort state value, if any, and reverses it; otherwise returns ascending if no previous sort value
+- [x] write sortedDeals function; !!! need to explain what this function is doing !!!
+- [x] wrote getSortIndicator function; takes a sortable field and sets the sort indicator based on what the sortState direction values are
+- [x] wrote vars for sorting the columns; just a quick way to shorten what is needed in the html elements
+- [x] rewrote the `<th>` elements to have `aria-sort` attributes that use the appropriate var and method's return property to set the sort icon direction to be displayed.
+- [x] implemented the `<button>` for the sort; used button because it is semantic, since sorting is a click action, and using a button gives us accessibility for free
 
 ## Sources
 
