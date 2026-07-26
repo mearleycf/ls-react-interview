@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import Form from "@rjsf/core";
+import { generateForm } from "@rjsf/material-ui";
 import validator from "@rjsf/validator-ajv8";
 import {
   newDealSchema,
@@ -10,6 +10,8 @@ import {
 import { addDeal } from "../DealsTable/fetch";
 import { DealType } from "../../types";
 import "./NewDealForm.scss";
+
+const Form = generateForm<NewDealFormData>();
 
 const DealForm = () => {
   const queryClient = useQueryClient();
@@ -38,7 +40,7 @@ const DealForm = () => {
   return (
     <div className="NewDealForm tile">
       <h2 className="tile--header">Add New Deal</h2>
-      <Form<NewDealFormData>
+      <Form
         key={formKey}
         schema={newDealSchema}
         uiSchema={newDealUiSchema}

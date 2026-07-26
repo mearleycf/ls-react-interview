@@ -41,6 +41,13 @@
       "dealType": "Real Estate",
       "dealSize": "4000000",
       "isPublished": false
+    },
+    {
+      "institution": "LS Credit Union",
+      "dealType": "Home Equity",
+      "dealSize": "2300134",
+      "isPublished": true,
+      "id": 7
     }
   ]
 }
