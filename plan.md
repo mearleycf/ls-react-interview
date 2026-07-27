@@ -90,6 +90,56 @@
   - note: I had Claude do most of the implementation here--the work was a matter of importing material-ui components (e.g. TableRow, TableCell) and replacing the standard versions of those html elements (e.g. `<tr>`, `<td>`) with the react material ui versions. Grunt work, good work for the AI.
 - [x] doing some basic freeform style riffing on the site; added the loanstreet wordmark based logo to replace the symbol only logo; used a gradient background for the background of the table header row; changed the actions text color to be a loanstreet green color; changed the submit button to be a loanstreet green color; changed row hover to be $RobinLight1 instead of the default dark slate blue it was; changed app background color to $Robin. Changed sort button colors to Ivory. Increased App--Header font size to 20px (1.25rem) instead of 14px--I didn't like how small it was...
 - [x] had claude create markdown docs for each component, documenting a list of tests it recommends we write if we were going to write the tests, given more time.
+- [x] had claude run sanity checks through whole application to find outstanding errors and resolve them;
+  - found issue with yarn build, something something OpenSSL 3.0 vs. old w3ebpack MD4-hash incompatibility
+  - found orphaned reference to `<LSLogo />`, removed it
+  - found a real gap against task 1: validation was blocking submit, but no error text ever displayed. Turned out the browser's native HTML5 `required` validation was firing first and preempting RJSF's own AJV validation/error UI before it ever ran. Fixed with `noHtml5Validate` on the Form.
+  - found (not fixed): deleting a row logs a "can't update state on an unmounted component" warning -- benign/no-op per React's own message, root cause is each DealsTableRow owning its own remove/publish mutations, so the mutation's own success-state update fires after the row that owns it has already unmounted. Real fix would be lifting those mutations to DealsTable; leaving as a known item given time constraints.
+
+## End Result -- Task Implementations
+
+### Add Validation
+
+"Add validation so that a deal isn't created unless all fields are entered. Display errors when a field is missing or contains bad data according to the UX form fields design."
+
+I chose to implement validation by implementing the package 'React-JSONSchema-Form' (aka RJSF). This allowed me to introduce validation and error handling in a fairly simple manner. I chose this solution because it is something I mentioned to Chris during my interview as a possible solution for JSON schema driven form creation; I thought it would be interesting to explore it here.
+
+### Remove Deals
+
+"Add ability to remove deals from the DealsTable (interface up to you)."
+
+I had implemented calls to the json-server via fetch.ts, a new file. I added an 'Actions' column to the DealsTable, and then added 'Delete' and 'Publish/Unpublish' buttons to each row. The 'Delete' button calls 'removeDeal' and deletes the deal.
+
+### Publish Deals
+
+"Add ability to publish a deal from the DealsTable (interface up to you)."
+
+I had implemented calls to the json-server via fetch.ts, a new file. I added an 'Actions' column to the DealsTable, and then added 'Delete' and 'Publish/Unpublish' buttons to each row. The 'Publish/Unpublish' button calls updateDeal and either publishes or unpublishes the deal.
+
+### Sort Deal Rows
+
+"Add ability to sort deal rows in ascending or descending order by clicking the header cell of the different fields by which you wish to order. You can find the SortIcon is in the assets folder."
+
+I used SortIcon.tsx, useState, and useMemo to handle sorting. UseState allowed me to store the current sort state of the various columns. Specifically, it stores the column being sorted and the current sort direction. A handleSort function calls setSortState and uses a ternary to change the value from its current value to the opposite value. UseMemo is computed from 'deals' (the raw query data from tanstack) and sortState (what sort option the user clicked), and useMemo's value is only recomputed when either the 'deals' data or the sortState changes between renders. UseMemo lets us maintain sorts without having to re-render it, if other events (e.g. a delete button click) re-renders a different part of the page.
+Splitting the data into two separate hooks--'deals' to store what the data actually is, and sortState to store how the user currently wants to arrange the data in the table--means that we can apply sortState's current value to the current data and always have a correctly rendered dataset. Displayed data won't go stale because we are attempting to store both data and its display order in a single store.
+
+### (Bonus) Connect to Mock JSON Server
+
+"Connect to the mock json server using the HTTP client of your choice so that any data that you manipulate saves into the db.json file."
+
+I implemented a generic request function that accepts a generic `<T>` type, allowing me to pass any of the needed types from any of the GET/POST/PATCH/DELETE REST calls. I added a proxy property to package.json to route calls to the json-server address localhost:8000. Then I pointed all of the necessary event calls that need to get, add, edit, or delete data at the fetch.ts functionality, thus connecting to the mock json-server, and saving any data being manipulated into db.json.
+
+### (Bonus) Write Tests
+
+"Write tests for any of the requirements that you implement."
+
+I originally set out to write tests at the beginning of my tasks, but ended up starting with fetch.ts instead. As we got further in the project, we started experiencing compatibility issues with create-react-app and the jest-dom findBy* functions. I pushed off testing until the end of the assignment, since it was bonus work. I ended up just brainstorming a list of tests I would ideally write with Claude, and listing those tests in markdown files colocated with the various component files.
+
+### (Bonus) Improve Styling
+
+"Pretty up the table styling."
+
+I implemented Material UI v4, which was compatible with RJSF v5, the version I had to implement due to compatibility with React 16. I had Claude do most of the grunt work heavy lifting--i.e. converting generic html tags like `<tr>` to material ui specific react components like `<TableRow>`. Then I made some changes just because I liked how they looked--implemented a gradient on the table header row, using the colors from LoanStreet's logo. Changed the SortIcon.tsx button colors to Ivory. Replaced the LoanStreet logo-only version with the full logo+wordmark version of the logo. Changed the body background color to $Robin. Changed button colors to other theme.scss based design tokens.
 
 ## Sources
 

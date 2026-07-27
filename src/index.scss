@@ -67,8 +67,11 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: $LoanstreetGreenDark;
     text-decoration: underline;
-    transition: transform 150ms ease, background-color 150ms ease,
-      border-color 150ms ease, color 150ms ease;
+    transition:
+      transform 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.75);
@@ -90,5 +93,9 @@ body {
       text-decoration: none;
       cursor: not-allowed;
     }
+  }
+
+  .MuiTableCell-root {
+    border-bottom: 0px solid rgba(0, 0, 0, 0);
   }
 }
