@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getDeals } from "./fetch";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { getDeals, removeDeal, updateDeal } from "./fetch";
+import { DealType } from "../../types";
 import DealsTableRow from "./DealsTableRow/DealsTableRow";
 import "./DealsTable.scss";
 import SortIcon from "../../assets/SortIcon";
@@ -29,6 +30,27 @@ const DealsTable = () => {
   } = useQuery({
     queryKey: ["deals"],
     queryFn: getDeals,
+  });
+
+  const queryClient = useQueryClient();
+
+  const {
+    mutate: removeMutate,
+    isPending: isRemoving,
+    variables: removingId,
+  } = useMutation({
+    mutationFn: (id: number) => removeDeal(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["deals"] }),
+  });
+
+  const {
+    mutate: togglePublishMutate,
+    isPending: isToggling,
+    variables: togglingDeal,
+  } = useMutation({
+    mutationFn: (deal: DealType) =>
+      updateDeal(deal.id!, { isPublished: !deal.isPublished }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["deals"] }),
   });
 
   const [sortState, setSortState] = useState<SortState>(null);
@@ -92,7 +114,14 @@ const DealsTable = () => {
   const isPublishedSort = getSortIndicator("isPublished");
 
   const dealsTableRows = sortedDeals.map((deal) => (
-    <DealsTableRow key={deal.id} deal={deal} />
+    <DealsTableRow
+      key={deal.id}
+      deal={deal}
+      onRemove={() => removeMutate(deal.id!)}
+      onTogglePublish={() => togglePublishMutate(deal)}
+      isRemoving={isRemoving && removingId === deal.id}
+      isToggling={isToggling && togglingDeal?.id === deal.id}
+    />
   ));
 
   return (

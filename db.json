@@ -1,13 +1,6 @@
 {
   "deals": [
     {
-      "id": 2,
-      "institution": "LS Credit Union",
-      "dealSize": "5000000",
-      "dealType": "Real Estate",
-      "isPublished": true
-    },
-    {
       "id": 3,
       "institution": "LS Credit Union",
       "dealSize": "2000000",
@@ -19,7 +12,7 @@
       "institution": "LS Credit Union",
       "dealSize": "3000000",
       "dealType": "Real Estate",
-      "isPublished": false
+      "isPublished": true
     },
     {
       "id": 5,

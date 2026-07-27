@@ -1,7 +1,5 @@
 import React from "react";
 import { DealType } from "../../../types";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { removeDeal, updateDeal } from "../fetch";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 
@@ -13,24 +11,20 @@ const currencyAmountToString = (amount: string) => {
 
 type DealsTableRowProps = {
   deal: DealType;
+  onRemove: () => void;
+  onTogglePublish: () => void;
+  isRemoving: boolean;
+  isToggling: boolean;
 };
 
 const DealsTableRow = (props: DealsTableRowProps) => {
   const {
-    deal: { id, institution, dealType, dealSize, isPublished },
+    deal: { institution, dealType, dealSize, isPublished },
+    onRemove,
+    onTogglePublish,
+    isRemoving,
+    isToggling,
   } = props;
-
-  const queryClient = useQueryClient();
-
-  const { mutate: remove, isPending: isRemoving } = useMutation({
-    mutationFn: () => removeDeal(id!),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["deals"] }),
-  });
-
-  const { mutate: togglePublish, isPending: isToggling } = useMutation({
-    mutationFn: () => updateDeal(id!, { isPublished: !isPublished }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["deals"] }),
-  });
 
   return (
     <TableRow className="DealsTableRow">
@@ -45,7 +39,7 @@ const DealsTableRow = (props: DealsTableRowProps) => {
       <TableCell className="flex-row">
         <button
           className="button--transparent"
-          onClick={() => remove()}
+          onClick={onRemove}
           disabled={isRemoving}
         >
           Delete
@@ -53,7 +47,7 @@ const DealsTableRow = (props: DealsTableRowProps) => {
         <span>|</span>
         <button
           className="button--transparent"
-          onClick={() => togglePublish()}
+          onClick={onTogglePublish}
           disabled={isToggling}
         >
           {isPublished ? "Unpublish" : "Publish"}
