@@ -95,6 +95,7 @@
   - found orphaned reference to `<LSLogo />`, removed it
   - found a real gap against task 1: validation was blocking submit, but no error text ever displayed. Turned out the browser's native HTML5 `required` validation was firing first and preempting RJSF's own AJV validation/error UI before it ever ran. Fixed with `noHtml5Validate` on the Form.
   - found (not fixed): deleting a row logs a "can't update state on an unmounted component" warning -- benign/no-op per React's own message, root cause is each DealsTableRow owning its own remove/publish mutations, so the mutation's own success-state update fires after the row that owns it has already unmounted. Real fix would be lifting those mutations to DealsTable; leaving as a known item given time constraints.
+- [x] after submission, changed error handling so that the error messages appearing at top AND inline wouldn't happen, only inline would happen
 
 ## End Result -- Task Implementations
 
@@ -103,6 +104,8 @@
 "Add validation so that a deal isn't created unless all fields are entered. Display errors when a field is missing or contains bad data according to the UX form fields design."
 
 I chose to implement validation by implementing the package 'React-JSONSchema-Form' (aka RJSF). This allowed me to introduce validation and error handling in a fairly simple manner. I chose this solution because it is something I mentioned to Chris during my interview as a possible solution for JSON schema driven form creation; I thought it would be interesting to explore it here.
+
+Came back Monday morning and decided to disable the showErrorList displaying at 'top'. It was too much. Left only the inline error for now.
 
 ### Remove Deals
 

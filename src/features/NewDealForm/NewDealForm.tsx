@@ -46,6 +46,7 @@ const DealForm = () => {
         uiSchema={newDealUiSchema}
         validator={validator}
         noHtml5Validate
+        showErrorList={false}
         onSubmit={({ formData }) => {
           const data = formData as NewDealFormData;
           mutate({
